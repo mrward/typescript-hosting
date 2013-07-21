@@ -28,7 +28,7 @@ namespace TypeScriptHosting
 				host = new LanguageServiceShimHost();
 				context.SetParameter("host", host);
 				
-				//host.AddFile("lib.d.ts", File.ReadAllText("lib.d.ts"));
+				host.AddFile("lib.d.ts", File.ReadAllText("lib.d.ts"));
 				
 				string source = File.ReadAllText("typescriptServices.js");
 				context.Run(source);
@@ -36,7 +36,7 @@ namespace TypeScriptHosting
 				source = File.ReadAllText("test.ts");
 				scriptTextBox.Text = source;
 				
-				string fileName = "Main.js";
+				string fileName = "test.ts";
 				host.AddFile(fileName, source);
 				host.FileName = fileName;
 				
@@ -82,7 +82,7 @@ namespace TypeScriptHosting
 		
 		void ScriptTextBoxTextChanged(object sender, EventArgs e)
 		{
-			host.UpdateFile(0, scriptTextBox.Text);
+			host.UpdateFile("test.ts", scriptTextBox.Text);
 		}
 		
 		void SignatureCompletionToolStripMenuItemClick(object sender, EventArgs e)

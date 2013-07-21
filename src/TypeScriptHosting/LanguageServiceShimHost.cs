@@ -3,13 +3,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace TypeScriptHosting
 {
 	public class LanguageServiceShimHost : ILanguageServiceShimHost
 	{
-		List<Script> scripts = new List<Script>();
+		Dictionary<string, Script> scripts = new Dictionary<string, Script>();
 		
 		public LanguageServiceShimHost()
 		{
@@ -17,12 +19,12 @@ namespace TypeScriptHosting
 		
 		public void AddFile(string fileName, string text)
 		{
-			scripts.Add(new Script(fileName, text));
+			scripts.Add(fileName, new Script(fileName, text));
 		}
 		
-		public void UpdateFile(int index, string text)
+		public void UpdateFile(string fileName, string text)
 		{
-			scripts[index].Update(text);
+			scripts[fileName].Update(text);
 		}
 		
 		public int Position { get; set; }
@@ -63,11 +65,6 @@ namespace TypeScriptHosting
 			Console.WriteLine(s);
 		}
 		
-		void LogFormat(string format, params object[] args)
-		{
-			log(String.Format(format, args));
-		}
-		
 		public void foo(object o)
 		{
 			Console.WriteLine(o);
@@ -85,51 +82,43 @@ namespace TypeScriptHosting
 			return null;
 		}
 		
-		public int getScriptCount()
+		public IScriptSnapshotShim getScriptSnapshot(string fileName)
 		{
-			log("Host.getScriptCount");
-			return scripts.Count;
+			log("Host.getScriptSnapshot: " + fileName);
+			Script script = scripts[fileName];
+			return new ScriptSnapshotShim(script);
 		}
 		
-		public string getScriptId(int scriptIndex)
+		public bool getScriptIsOpen(string fileName)
 		{
-			log("Host.getScriptId: " + scriptIndex);
-			return scripts[scriptIndex].Id;
+			log("Host.getScriptIsOpen: " + fileName);
+			if (fileName == "lib.d.ts") {
+				return false;
+			}
+			return true;
 		}
 		
-		public string getScriptSourceText(int scriptIndex, int start, int end)
+		public int getScriptVersion(string fileName)
 		{
-			LogFormat("Host.getScriptSourceText: index={0}, start={1}, end={2}", scriptIndex, start, end);
-			Script script = scripts[scriptIndex];
-			return script.Source.Substring(start, end - start);
+			log("Host.getScriptVersion: " + fileName);
+			return scripts[fileName].Version;
 		}
 		
-		public int getScriptSourceLength(int scriptIndex)
+		public ILanguageServicesDiagnostics getDiagnosticsObject()
 		{
-			log("Host.getScriptId: " + scriptIndex);
-			return scripts[scriptIndex].Source.Length;
+			log("Host.getDiagnosticsObject");
+			return new LanguageServicesDiagnostics();
 		}
 		
-		public bool getScriptIsResident(int scriptIndex)
+		public string getScriptFileNames()
 		{
-			log("Host.getScriptIsResident: " + scriptIndex);
-			return false;
-		}
-		
-		public int getScriptVersion(int scriptIndex)
-		{
-			log("Host.getScriptVersion: " + scriptIndex);
-			return scripts[scriptIndex].Version;
-		}
-		
-		public string getScriptEditRangeSinceVersion(int scriptIndex, int scriptVersion)
-		{
-			LogFormat("Host.getScriptId: index={0}, version={1}", scriptIndex, scriptVersion);
-			Script script = scripts[scriptIndex];
-			if (script.Version == scriptVersion)
-				return null;
+			log("Host.getScriptFileNames");
 			
-			return "{ \"minChar\": -1, \"limChar\": -1, \"delta\": -1}";
+			string json = JsonConvert.SerializeObject(scripts.Keys.ToArray());
+			
+			log("Host.getScriptFileNames: " + json);
+			
+			return json;
 		}
 	}
 }

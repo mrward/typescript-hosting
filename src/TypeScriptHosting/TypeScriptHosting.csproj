@@ -60,8 +60,11 @@
     <Compile Include="CompletionEntry.cs" />
     <Compile Include="CompletionInfo.cs" />
     <Compile Include="CompletionResult.cs" />
+    <Compile Include="ILanguageServicesDiagnostics.cs" />
     <Compile Include="ILanguageServiceShimHost.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="IScriptSnapshotShim.cs" />
+    <Compile Include="LanguageServicesDiagnostics.cs" />
     <Compile Include="LanguageServiceShimHost.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
@@ -70,6 +73,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script.cs" />
+    <Compile Include="ScriptSnapshotShim.cs" />
+    <Compile Include="TextChangeRange.cs" />
+    <Compile Include="TextSpan.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -77,7 +83,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Empty1.ts" />
-    <None Include="jquery.d.ts" />
     <None Include="lib.d.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -99,8 +104,6 @@
     <None Include="typescriptServices.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="winjs.d.ts" />
-    <None Include="winrt.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
