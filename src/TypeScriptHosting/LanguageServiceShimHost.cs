@@ -120,5 +120,45 @@ namespace TypeScriptHosting
 			
 			return json;
 		}
+		
+		public string resolveRelativePath(string path, string directory)
+		{
+			log("Host.resolveRelativePath: " + path + ", " + directory);
+			
+			if (Path.IsPathRooted(path) || String.IsNullOrEmpty(directory)) {
+				return path;
+			} else {
+				return Path.Combine(directory, path);
+			}
+		}
+		
+		public bool fileExists(string path)
+		{
+			log("Host.fileExists: " + path);
+			return File.Exists(path);
+		}
+		
+		public bool directoryExists(string path)
+		{
+			log("Host.directoryExists: " + path);
+			return Directory.Exists(path);
+		}
+		
+		public string getParentDirectory(string path)
+		{
+			log("Host.getParentDirectory: " + path);
+			throw new NotImplementedException();
+		}
+		
+		public string getLocalizedDiagnosticMessages()
+		{
+			log("Host.getLocalizedDiagnosticMessages");
+			return null;
+		}
+		
+		public ByteOrderMark getScriptByteOrderMark(string fileName)
+		{
+			return ByteOrderMark.None;
+		}
 	}
 }

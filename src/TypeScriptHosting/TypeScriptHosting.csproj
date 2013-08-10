@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteOrderMark.cs" />
     <Compile Include="CompletionEntry.cs" />
     <Compile Include="CompletionInfo.cs" />
     <Compile Include="CompletionResult.cs" />
