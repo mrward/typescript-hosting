@@ -4,26 +4,26 @@
 using System;
 using Newtonsoft.Json;
 
-namespace TypeScriptHosting
+namespace ICSharpCode.TypeScriptBinding.Hosting
 {
 	public class ScriptSnapshotShim : IScriptSnapshotShim
 	{
+		ILogger logger;
 		Script script;
 		
-		public ScriptSnapshotShim(Script script)
+		public ScriptSnapshotShim(ILogger logger, Script script)
 		{
+			this.logger = logger;
 			this.script = script;
 		}
 		
 		public string getText(int start, int end)
 		{
-			Log("ScriptSnapshotShim.getText: start={0}, end={1}", start, end);
 			return script.Source.Substring(start, end - start);
 		}
 		
 		public int getLength()
 		{
-			Log("ScriptSnapshotShim.getLength");
 			return script.Source.Length;
 		}
 		
@@ -34,7 +34,7 @@ namespace TypeScriptHosting
 			int[] positions = script.GetLineStartPositions();
 			string json = JsonConvert.SerializeObject(positions);
 			
-			Log("ScriptSnapshotShim.getLineStartPositions: {0}", json);
+			//Log("ScriptSnapshotShim.getLineStartPositions: {0}", json);
 			
 			return json;
 		}
@@ -44,16 +44,18 @@ namespace TypeScriptHosting
 			Log("ScriptSnapshotShim.getTextChangeRangeSinceVersion: version={0}", scriptVersion);
 			if (script.Version == scriptVersion)
 				return null;
-		
+			
 			TextChangeRange textChangeRange = script.GetTextChangeRangeSinceVersion(scriptVersion);
 			string json = JsonConvert.SerializeObject(textChangeRange);
+			
 			Log("ScriptSnapshotShim.getTextChangeRangeSinceVersion: json: {0}", json);
+			
 			return json;
 		}
 		
 		void Log(string format, params object[] args)
 		{
-			Console.WriteLine(format, args);
+			logger.log(String.Format(format, args));
 		}
 	}
 }

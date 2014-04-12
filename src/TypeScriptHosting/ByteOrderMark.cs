@@ -1,7 +1,9 @@
 ﻿// Copyright (c) AlphaSierraPapa for the SharpDevelop Team (for details please see \doc\copyright.txt)
 // This code is distributed under the GNU LGPL (for details please see \doc\license.txt)
 
-namespace TypeScriptHosting
+using System;
+
+namespace ICSharpCode.TypeScriptBinding.Hosting
 {
 	public enum ByteOrderMark {
 		None,
@@ -10,4 +12,3 @@ namespace TypeScriptHosting
 		Utf16LittleEndian,
 	}
 }
-

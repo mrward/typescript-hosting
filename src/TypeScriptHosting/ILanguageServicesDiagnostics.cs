@@ -3,7 +3,7 @@
 
 using System;
 
-namespace TypeScriptHosting
+namespace ICSharpCode.TypeScriptBinding.Hosting
 {
 	public interface ILanguageServicesDiagnostics
 	{

@@ -3,9 +3,8 @@
 
 using System;
 
-namespace TypeScriptHosting
+namespace ICSharpCode.TypeScriptBinding.Hosting
 {
-	// "{ \"span\": { \"start\": 0, \"length\": {0}) }, \"newLength\": {1} }",
 	public class TextChangeRange
 	{
 		public TextChangeRange(int start, int length, int newLength)

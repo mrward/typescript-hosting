@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using ICSharpCode.TypeScriptBinding.Hosting;
 
 namespace TypeScriptHosting
 {
@@ -86,7 +87,7 @@ namespace TypeScriptHosting
 		{
 			log("Host.getScriptSnapshot: " + fileName);
 			Script script = scripts[fileName];
-			return new ScriptSnapshotShim(script);
+			return new ScriptSnapshotShim(this, script);
 		}
 		
 		public bool getScriptIsOpen(string fileName)
