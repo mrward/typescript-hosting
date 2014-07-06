@@ -71,10 +71,12 @@
     <Compile Include="LanguageServicesCompiler.cs" />
     <Compile Include="LanguageServicesDiagnostics.cs" />
     <Compile Include="LanguageServiceShimHost.cs" />
+    <Compile Include="LanguageVersion.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuleGenTarget.cs" />
     <Compile Include="OutputFile.cs" />
     <Compile Include="OutputFileType.cs" />
     <Compile Include="Program.cs" />
@@ -90,6 +92,7 @@
     <None Include="compile.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="CompilerSettings.cs" />
     <None Include="Completion.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

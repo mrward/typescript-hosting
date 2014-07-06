@@ -80,7 +80,7 @@ namespace TypeScriptHosting
 		public string getCompilationSettings()
 		{
 			log("Host.getCompilationSettings");
-			return null;
+			return JsonConvert.SerializeObject(new CompilerSettings() { mapSourceFiles = true });
 		}
 		
 		public IScriptSnapshotShim getScriptSnapshot(string fileName)
