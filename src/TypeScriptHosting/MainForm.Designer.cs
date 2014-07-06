@@ -42,6 +42,7 @@ namespace TypeScriptHosting
 			this.scriptTextBox = new System.Windows.Forms.RichTextBox();
 			this.javascriptTabPage = new System.Windows.Forms.TabPage();
 			this.adhocJavascriptTextBox = new System.Windows.Forms.RichTextBox();
+			this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenuStrip.SuspendLayout();
 			this.tabControl.SuspendLayout();
 			this.typescriptTabPage.SuspendLayout();
@@ -64,7 +65,8 @@ namespace TypeScriptHosting
 									this.runToolStripMenuItem,
 									this.memberCompletionToolStripMenuItem,
 									this.completionToolStripMenuItem,
-									this.signatureCompletionToolStripMenuItem});
+									this.signatureCompletionToolStripMenuItem,
+									this.compileToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -152,6 +154,13 @@ namespace TypeScriptHosting
 			this.adhocJavascriptTextBox.Text = "ls.refresh(true);\nvar sig = ls.getSignatureAtPosition(host.FileName, host.getPosi" +
 			"tion());\nhost.log(sig);";
 			// 
+			// compileToolStripMenuItem
+			// 
+			this.compileToolStripMenuItem.Name = "compileToolStripMenuItem";
+			this.compileToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.compileToolStripMenuItem.Text = "Com&pile";
+			this.compileToolStripMenuItem.Click += new System.EventHandler(this.CompileToolStripMenuItemClick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,6 +179,7 @@ namespace TypeScriptHosting
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ToolStripMenuItem compileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem signatureCompletionToolStripMenuItem;
 		private System.Windows.Forms.RichTextBox adhocJavascriptTextBox;
 		private System.Windows.Forms.TabPage javascriptTabPage;

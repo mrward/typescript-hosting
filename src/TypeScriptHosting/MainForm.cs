@@ -95,5 +95,15 @@ namespace TypeScriptHosting
 				Console.WriteLine(ex.ToString());
 			}
 		}
+		
+		void CompileToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			try {
+				string source = File.ReadAllText("Compile.js");
+				context.Run(source);
+			} catch (Exception ex) {
+				Console.WriteLine(ex.ToString());
+			}
+		}
 	}
 }

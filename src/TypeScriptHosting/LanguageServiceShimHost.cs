@@ -161,5 +161,17 @@ namespace TypeScriptHosting
 		{
 			return ByteOrderMark.None;
 		}
+		
+		public string ResolvePath(string path)
+		{
+			log("ResolvePath: '" + path + "'");
+			return path;
+		}
+		
+		public void updateCompilerResult(string compilerResult)
+		{
+			log(compilerResult);
+			CompilerResult result = JsonConvert.DeserializeObject<CompilerResult>(compilerResult);
+		}
 	}
 }

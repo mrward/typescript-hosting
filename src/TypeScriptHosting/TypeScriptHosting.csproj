@@ -58,28 +58,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteOrderMark.cs" />
+    <Compile Include="CompilerResult.cs" />
     <Compile Include="CompletionEntry.cs" />
     <Compile Include="CompletionInfo.cs" />
     <Compile Include="CompletionResult.cs" />
+    <Compile Include="EmitOutput.cs" />
+    <Compile Include="EmitOutputResult.cs" />
     <Compile Include="ILanguageServicesDiagnostics.cs" />
     <Compile Include="ILanguageServiceShimHost.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IScriptSnapshotShim.cs" />
+    <Compile Include="LanguageServicesCompiler.cs" />
     <Compile Include="LanguageServicesDiagnostics.cs" />
     <Compile Include="LanguageServiceShimHost.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutputFile.cs" />
+    <Compile Include="OutputFileType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="ScriptSnapshotShim.cs" />
+    <Compile Include="SourceMapEntry.cs" />
     <Compile Include="TextChangeRange.cs" />
     <Compile Include="TextSpan.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="compile.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Completion.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
