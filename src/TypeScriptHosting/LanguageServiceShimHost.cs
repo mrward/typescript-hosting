@@ -10,7 +10,7 @@ using ICSharpCode.TypeScriptBinding.Hosting;
 
 namespace TypeScriptHosting
 {
-	public class LanguageServiceShimHost : ILanguageServiceShimHost
+	public class LanguageServiceShimHost : ILanguageServiceShimHost, ICancellationToken
 	{
 		Dictionary<string, Script> scripts = new Dictionary<string, Script>();
 		
@@ -99,10 +99,10 @@ namespace TypeScriptHosting
 			return true;
 		}
 		
-		public int getScriptVersion(string fileName)
+		public string getScriptVersion(string fileName)
 		{
 			log("Host.getScriptVersion: " + fileName);
-			return scripts[fileName].Version;
+			return scripts[fileName].Version.ToString();
 		}
 		
 		public ILanguageServicesDiagnostics getDiagnosticsObject()
@@ -172,6 +172,26 @@ namespace TypeScriptHosting
 		{
 			log(compilerResult);
 			CompilerResult result = JsonConvert.DeserializeObject<CompilerResult>(compilerResult);
+		}
+
+		public ICancellationToken getCancellationToken()
+		{
+			return this;
+		}
+
+		public string getCurrentDirectory()
+		{
+			return String.Empty;
+		}
+
+		public string getDefaultLibFilename()
+		{
+			return String.Empty;
+		}
+		
+		public bool isCancellationRequested()
+		{
+			return false;
 		}
 	}
 }

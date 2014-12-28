@@ -63,7 +63,8 @@
     <Compile Include="CompletionInfo.cs" />
     <Compile Include="CompletionResult.cs" />
     <Compile Include="EmitOutput.cs" />
-    <Compile Include="EmitOutputResult.cs" />
+    <Compile Include="EmitReturnStatus.cs" />
+    <Compile Include="ICancellationToken.cs" />
     <Compile Include="ILanguageServicesDiagnostics.cs" />
     <Compile Include="ILanguageServiceShimHost.cs" />
     <Compile Include="ILogger.cs" />

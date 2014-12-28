@@ -1,10 +1,10 @@
 ﻿// 
-// Script.cs
+// ICancellationToken.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2013 Matthew Ward
+// Copyright (C) 2014 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -27,56 +27,11 @@
 //
 
 using System;
-using System.Collections.Generic;
 
 namespace ICSharpCode.TypeScriptBinding.Hosting
 {
-	public class Script
+	public interface ICancellationToken
 	{
-		string fileName;
-		List<int> lineStartPositions = new List<int>();
-		List<int> lengths = new List<int>();
-		
-		public Script(string fileName, string source)
-		{
-			this.fileName = fileName;
-			this.Source = source;
-			this.Version = 1;
-			lengths.Add(source.Length);
-		}
-		
-		public void Update(string source)
-		{
-			this.Source = source;
-			lengths.Add(source.Length);
-			Version++;
-		}
-		
-		public string Id {
-			get { return fileName; }
-		}
-		
-		public string Source { get; private set; }
-		public int Version { get; private set; }
-		
-		public int[] GetLineStartPositions()
-		{
-			if (lineStartPositions.Count == 0) {
-				string[] lines = Source.Split('\r');
-				lineStartPositions.Add(0);
-				int position = 0;
-				for (int i = 0; i < lines.Length; ++i) {
-					position += lines[i].Length + 2;
-					lineStartPositions.Add(position);
-				}
-			}
-			
-			return lineStartPositions.ToArray();
-		}
-		
-		public TextChangeRange GetTextChangeRange(IScriptSnapshotShim oldSnapshot)
-		{
-			return new TextChangeRange(0, oldSnapshot.getLength(), Source.Length);
-		}
+		bool isCancellationRequested();
 	}
 }
