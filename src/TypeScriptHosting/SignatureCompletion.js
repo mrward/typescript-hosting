@@ -1,3 +1,3 @@
 ﻿ls.refresh(true);
-var sig = ls.getSignatureAtPosition(host.FileName, host.getPosition());
+var sig = ls.getSignatureHelpItems(host.FileName, host.getPosition());
 host.log(sig);

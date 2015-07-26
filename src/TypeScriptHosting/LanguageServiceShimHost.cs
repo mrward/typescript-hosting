@@ -71,6 +71,16 @@ namespace TypeScriptHosting
 			Console.WriteLine(o);
 		}
 		
+		public void trace(string s)
+		{
+			log(s);
+		}
+		
+		public void error(string s)
+		{
+			log(s);
+		}
+		
 		public void updateCompletionInfoAtCurrentPosition(string completionInfo)
 		{
 			log(completionInfo);
@@ -80,7 +90,7 @@ namespace TypeScriptHosting
 		public string getCompilationSettings()
 		{
 			log("Host.getCompilationSettings");
-			return JsonConvert.SerializeObject(new CompilerSettings() { mapSourceFiles = true });
+			return JsonConvert.SerializeObject(new CompilerOptions() { target = ScriptTarget.ES5 });
 		}
 		
 		public IScriptSnapshotShim getScriptSnapshot(string fileName)
@@ -88,15 +98,6 @@ namespace TypeScriptHosting
 			log("Host.getScriptSnapshot: " + fileName);
 			Script script = scripts[fileName];
 			return new ScriptSnapshotShim(this, script);
-		}
-		
-		public bool getScriptIsOpen(string fileName)
-		{
-			log("Host.getScriptIsOpen: " + fileName);
-			if (fileName == "lib.d.ts") {
-				return false;
-			}
-			return true;
 		}
 		
 		public string getScriptVersion(string fileName)
@@ -157,11 +158,6 @@ namespace TypeScriptHosting
 			return null;
 		}
 		
-		public ByteOrderMark getScriptByteOrderMark(string fileName)
-		{
-			return ByteOrderMark.None;
-		}
-		
 		public string ResolvePath(string path)
 		{
 			log("ResolvePath: '" + path + "'");
@@ -179,17 +175,35 @@ namespace TypeScriptHosting
 			return this;
 		}
 
+		public bool isCancellationRequested()
+		{
+			return false;
+		}
+
 		public string getCurrentDirectory()
 		{
 			return String.Empty;
 		}
 
-		public string getDefaultLibFilename()
+		public string getDefaultLibFilename(string s)
 		{
 			return String.Empty;
 		}
 		
-		public bool isCancellationRequested()
+		public string getNewLine()
+		{
+			return Environment.NewLine;
+		}
+		
+		int projectVersion;
+		
+		public string getProjectVersion()
+		{
+			projectVersion++;
+			return projectVersion.ToString();
+		}
+		
+		public bool useCaseSensitiveFileNames()
 		{
 			return false;
 		}

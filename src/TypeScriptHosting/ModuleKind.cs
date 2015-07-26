@@ -1,10 +1,10 @@
 ﻿// 
-// ILanguageServiceShimHost.cs
+// ModuleKind.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2013 Matthew Ward
+// Copyright (C) 2014 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,18 +30,12 @@ using System;
 
 namespace ICSharpCode.TypeScriptBinding.Hosting
 {
-	public interface ILanguageServiceShimHost : ILogger
+	public enum ModuleKind
 	{
-		string getCompilationSettings();
-		string getScriptFileNames();
-		string getScriptVersion(string fileName);
-		IScriptSnapshotShim getScriptSnapshot(string fileName);
-		string getLocalizedDiagnosticMessages();
-		ICancellationToken getCancellationToken();
-		string getCurrentDirectory();
-		string getDefaultLibFilename(string options);
-		string getNewLine();
-		string getProjectVersion();
-		bool useCaseSensitiveFileNames();
+		None = 0,
+		CommonJS = 1,
+		AMD = 2,
+		UMD = 3,
+		System = 4,
 	}
 }
